@@ -9,7 +9,7 @@ const {
   subtitle = await Astro.slots.render('subtitle'),
   tagline = await Astro.slots.render('tagline'),
   items = [],
-  columns = 2,
+  columns = 3,
 
   defaultIcon,
 
@@ -17,20 +17,37 @@ const {
   isDark = false,
   classes = {},
   bg = await Astro.slots.render('bg'),
-} = Astro.props;
+} = Astro.props as Props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
+<WidgetWrapper 
+  id={id} 
+  isDark={isDark} 
+  containerClass={`max-w-5xl ${classes?.container ?? ''}`} 
+  bg={bg || '<div class="absolute inset-0 bg-black"></div>'}
+>
+  <Headline 
+    title={title} 
+    subtitle={subtitle} 
+    tagline={tagline} 
+    classes={{
+      container: 'max-w-xl sm:mx-auto lg:max-w-2xl',
+      title: 'text-white text-3xl md:text-4xl leading-tighter tracking-tighter mb-4 font-heading font-normal',
+      subtitle: 'text-gray-400 text-xl',
+      tagline: 'inline-block rounded-full bg-[#faf7ec] text-black font-medium px-6 py-2 text-sm mb-8'
+    }}
+  />
   <ItemGrid
     items={items}
     columns={columns}
     defaultIcon={defaultIcon}
     classes={{
-      container: '',
-      title: 'md:text-[1.3rem]',
-      icon: 'text-white bg-primary rounded-full w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mr-4 rtl:ml-4 rtl:mr-0',
-      ...((classes?.items as Record<string, never>) ?? {}),
+      container: 'gap-4 md:gap-6',
+      panel: 'text-white',
+      title: 'text-white text-xl font-semibold',
+      description: 'text-gray-400',
+      icon: 'w-10 h-10 p-2 rounded-full border-2 border-white text-white bg-transparent',
+      ...((classes?.items as Record<string, string>) ?? {}),
     }}
   />
 </WidgetWrapper>

@@ -1,4 +1,4 @@
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getPermalink, getBlogPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -8,7 +8,7 @@ export const headerData = {
     },
     {
       text: 'Services',
-      href: getPermalink('/services'),
+      href: '/#features',
     },
     {
       text: 'Over Ons',
@@ -28,7 +28,7 @@ export const footerData = {
       title: 'Menu',
       links: [
         { text: 'Home', href: getPermalink('/') },
-        { text: 'Services', href: getPermalink('/services') },
+        { text: 'Diensten', href: '/#features' },
         { text: 'Over Ons', href: getPermalink('/about') },
         { text: 'Blog', href: getBlogPermalink() },
       ],
@@ -42,6 +42,6 @@ export const footerData = {
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
   ],
   footNote: `
-    © 2024 Your Company Name. All rights reserved.
+    © 2024 Faiber V.O.F. - KvK: 81232123 - BTW: NL812321232B01
   `,
 };

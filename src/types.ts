@@ -7,6 +7,8 @@ export interface CallToAction {
   text: string;
   href: string;
   icon?: string;
+  target?: string;
+  class?: string;
   variant?: 'primary' | 'secondary' | 'tertiary';
 }
 

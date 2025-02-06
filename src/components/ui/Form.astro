@@ -2,10 +2,15 @@
 import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const { inputs, textarea, disclaimer, button = 'Verstuur', description = '' } = Astro.props;
 ---
 
-<form>
+<form method="POST" id="contact-form" class="relative">
+  <input type="hidden" name="access_key" value="917d073e-59df-4c5a-8e05-c8d643b36306">
+  <input type="hidden" name="from_name" value="Faiber Website">
+  <input type="hidden" name="subject" value="Nieuwe aanvraag via website">
+  <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
   {
     inputs &&
       inputs.map(
@@ -21,6 +26,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
                 type={type}
                 name={name}
                 id={name}
+                required
                 autocomplete={autocomplete}
                 placeholder={placeholder}
                 class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-page dark:bg-slate-900"
@@ -40,6 +46,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           id="textarea"
           name={textarea.name ? textarea.name : 'message'}
           rows={textarea.rows ? textarea.rows : 4}
+          required
           placeholder={textarea.placeholder}
           class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-page dark:bg-slate-900"
         ></textarea>
@@ -54,6 +61,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           <input
             id="disclaimer"
             name="disclaimer"
+            required
             type="checkbox"
             class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-page dark:bg-slate-900"
           />
@@ -84,4 +92,56 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
       </div>
     )
   }
+
+  <div id="form-message" class="mt-4 text-center hidden">
+    <p class="text-sm"></p>
+  </div>
 </form>
+
+<script is:inline>
+const form = document.getElementById('contact-form');
+const result = document.getElementById('form-message');
+
+form.addEventListener('submit', function(e) {
+    const formData = new FormData(form);
+    e.preventDefault();
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    result.innerHTML = "Even geduld...";
+    result.classList.remove('hidden');
+
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.classList.remove('text-red-500');
+                result.classList.add('text-green-500');
+                result.innerHTML = "Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.";
+            } else {
+                result.classList.remove('text-green-500');
+                result.classList.add('text-red-500');
+                result.innerHTML = json.message || "Er is iets misgegaan. Probeer het later opnieuw.";
+            }
+        })
+        .catch(error => {
+            result.classList.remove('text-green-500');
+            result.classList.add('text-red-500');
+            result.innerHTML = "Er is iets misgegaan. Probeer het later opnieuw.";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 5000);
+        });
+});
+</script>

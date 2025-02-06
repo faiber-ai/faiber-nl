@@ -21,7 +21,6 @@ const {
   id,
   isDark = false,
   classes = {},
-  bg = await Astro.slots.render('bg'),
 } = Astro.props;
 ---
 
@@ -29,26 +28,27 @@ const {
   id={id}
   isDark={isDark}
   containerClass={`max-w-7xl mx-auto ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${classes?.container ?? ''}`}
-  bg={bg}
+  bg={null}
 >
   <Headline
     title={title}
     subtitle={subtitle}
     tagline={tagline}
     classes={{
-      container: 'max-w-xl sm:mx-auto lg:max-w-2xl',
-      title: 'text-4xl md:text-5xl font-bold tracking-tighter mb-4 font-heading',
-      subtitle: 'max-w-3xl mx-auto sm:text-center text-xl text-muted dark:text-slate-400',
+      container: 'max-w-3xl sm:mx-auto lg:max-w-4xl',
+      title: 'text-black text-3xl md:text-4xl leading-tighter tracking-tighter mb-4 font-heading font-normal',
+      subtitle: 'text-xl text-muted dark:text-slate-300 mb-6',
+      tagline: 'text-[#1f40ed] dark:text-blue-200 font-bold tracking-wide uppercase mb-8'
     }}
   />
   <div class="mx-auto max-w-7xl p-4 md:px-8">
     <div class={`md:flex ${isReversed ? 'md:flex-row-reverse' : ''} md:gap-16`}>
       <div class="md:basis-1/2 self-center">
-        {content && <div class="mb-12 text-lg dark:text-slate-400" set:html={content} />}
+        {content && <div class="mb-12 text-lg dark:text-slate-300" set:html={content} />}
 
         {
           callToAction && (
-            <div class="mt-[-40px] mb-8 text-primary">
+            <div class="mt-[-40px] mb-8">
               <Button variant="link" {...callToAction} />
             </div>
           )
@@ -61,10 +61,10 @@ const {
           classes={{
             container: `gap-y-4 md:gap-y-8`,
             panel: 'max-w-none',
-            title: 'text-lg font-medium leading-6 dark:text-white ml-2 rtl:ml-0 rtl:mr-2',
-            description: 'text-muted dark:text-slate-400 ml-2 rtl:ml-0 rtl:mr-2',
-            icon: 'flex h-7 w-7 items-center justify-center rounded-full bg-green-600 dark:bg-green-700 text-gray-50 p-1',
-            action: 'text-lg font-medium leading-6 dark:text-white ml-2 rtl:ml-0 rtl:mr-2',
+            title: 'text-lg font-medium leading-6 dark:text-gray-200 ml-2 rtl:ml-0 rtl:mr-2',
+            description: 'text-muted dark:text-slate-300 ml-2 rtl:ml-0 rtl:mr-2',
+            icon: 'flex h-7 w-7 items-center justify-center text-[#1f40ed] dark:text-blue-200 p-1',
+            action: 'text-lg font-medium leading-6 dark:text-gray-200 ml-2 rtl:ml-0 rtl:mr-2',
           }}
         />
       </div>
@@ -76,7 +76,7 @@ const {
                 <Fragment set:html={image} />
               ) : (
                 <Image
-                  class="mx-auto w-full rounded-lg bg-gray-500 shadow-lg"
+                  class="mx-auto w-full rounded-lg shadow-lg"
                   width={500}
                   height={500}
                   widths={[400, 768]}

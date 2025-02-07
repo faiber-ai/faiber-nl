@@ -7,17 +7,17 @@ export const headerData = {
       href: getPermalink('/'),
     },
     {
-      text: 'Services',
+      text: 'Diensten',
       href: '/#features',
     },
     {
       text: 'Over Ons',
       href: getPermalink('/about'),
     },
-    {
-      text: 'Blog',
-      href: getBlogPermalink(),
-    },
+    // {
+    //   text: 'Blog',
+    //   href: getBlogPermalink(),
+    // },
   ],
   actions: [{ text: 'Contact', href: getPermalink('/contact') }],
 };
@@ -30,7 +30,7 @@ export const footerData = {
         { text: 'Home', href: getPermalink('/') },
         { text: 'Diensten', href: '/#features' },
         { text: 'Over Ons', href: getPermalink('/about') },
-        { text: 'Blog', href: getBlogPermalink() },
+        // { text: 'Blog', href: getBlogPermalink() },
       ],
     },
   ],

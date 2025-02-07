@@ -5,8 +5,6 @@ import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
 import Content from '~/components/widgets/Content.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
@@ -191,13 +189,12 @@ const metadata = {
 
   <!-- HighlightedPosts Widget ******* -->
 
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
+    <!-- <BlogLatestPosts
+    title="Ontdek meer in onze Blog"
+    information={`In onze blog delen we de nieuwste inzichten en praktijkvoorbeelden over hoe AI overheidsprocessen transformeert.
+                    Blijf op de hoogte van trends, innovaties en succesverhalen die echt het verschil maken.`}
+  /> -->
+
 
   <!-- CallToAction Widget *********** -->
 
@@ -212,7 +209,7 @@ const metadata = {
     ]}
   >
     <Fragment slot="title">
-      Maak ruimte voor wat telt,<br class="block sm:hidden" /><span class="sm:whitespace-nowrap"> automatiseer de rest</span>
+      Maak ruimte voor wat telt, automatiseer de rest
     </Fragment>
 
     <Fragment slot="subtitle">

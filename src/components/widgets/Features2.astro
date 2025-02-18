@@ -1,9 +1,8 @@
 ---
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
-import type { Features as Props } from '~/types';
+import type { Features } from '~/types';
 import jasperImage from '~/assets/images/jasper.jpg';
-import robinImage from '~/assets/images/robin.png';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 
@@ -40,38 +39,40 @@ const columns = preferredColumns ?? (items.length === 1 ? 1 : 2);
 <WidgetWrapper 
   id={id} 
   isDark={isDark} 
-  containerClass={`max-w-5xl ${classes?.container ?? ''}`} 
+  containerClass="flex justify-center items-center" 
   bg={bg || '<div class="absolute inset-0 bg-black"></div>'}
 >
-  <Headline 
-    title={title} 
-    subtitle={subtitle} 
-    tagline={tagline} 
-    classes={{
-      container: 'max-w-xl sm:mx-auto lg:max-w-2xl',
-      title: 'text-white text-3xl md:text-4xl leading-tighter tracking-tighter mb-4 font-heading font-normal',
-      subtitle: 'text-white text-xl',
-      tagline: 'inline-block bg-[#faf7ec] text-black font-medium px-6 py-2 text-sm mb-8'
-    }}
-  />
-  <div class={`grid gap-8 gap-x-12 sm:gap-y-8 ${columns === 2 ? 'sm:grid-cols-2' : ''}`}>
-    {items.map(item => (
-      <div class="relative h-full rounded-lg backdrop-blur border border-[#ffffff29] bg-page dark:bg-slate-900 p-6">
-        <a href={item.linkedIn} class="absolute top-4 right-4">
-          <Icon name="tabler:brand-linkedin" class="w-6 h-6 text-blue-600" />
-        </a>
-        <div class="flex flex-col items-center">
-          <Image 
-            src={item.image} 
-            alt={item.title}
-            class="w-32 h-32 rounded-full mb-4 object-cover"
-            width={128}
-            height={128}
-          />
-          <div class="text-xl font-semibold text-black text-center">{item.title}</div>
-          <p class="text-black text-center mt-2">{item.description}</p>
+  <div class="w-full max-w-xl">
+    <Headline 
+      title={title} 
+      subtitle={subtitle} 
+      tagline={tagline} 
+      classes={{
+        container: 'text-center',
+        title: 'text-white text-3xl md:text-4xl leading-tighter tracking-tighter mb-4 font-heading font-normal text-center',
+        subtitle: 'text-white text-xl text-center',
+        tagline: 'inline-block bg-[#faf7ec] text-black font-medium px-6 py-2 text-sm mb-8'
+      }}
+    />
+    <div class="w-full max-w-lg mx-auto">
+      {items.map(item => (
+        <div class="relative h-full rounded-lg backdrop-blur border border-[#ffffff29] bg-page dark:bg-slate-900 p-6">
+          <a href={item.linkedIn} class="absolute top-4 right-4">
+            <Icon name="tabler:brand-linkedin" class="w-6 h-6 text-blue-600" />
+          </a>
+          <div class="flex flex-col items-center">
+            <Image 
+              src={item.image} 
+              alt={item.title}
+              class="w-32 h-32 rounded-full mb-4 object-cover"
+              width={128}
+              height={128}
+            />
+            <div class="text-xl font-semibold text-black text-center">{item.title}</div>
+            <p class="text-black text-center mt-2">{item.description}</p>
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </WidgetWrapper>

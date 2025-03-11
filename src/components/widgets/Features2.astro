@@ -26,15 +26,12 @@ const {
   title = await Astro.slots.render('title'),
   subtitle = await Astro.slots.render('subtitle'),
   tagline = await Astro.slots.render('tagline'),
+  columns = 2,
   id,
   isDark = false,
   classes = {},
   bg = await Astro.slots.render('bg'),
-  columns: preferredColumns,
 } = Astro.props;
-
-// If no columns prop is passed explicitly, default to 1 if there is only one item, otherwise 2
-const columns = preferredColumns ?? (items.length === 1 ? 1 : 2);
 ---
 
 <WidgetWrapper 

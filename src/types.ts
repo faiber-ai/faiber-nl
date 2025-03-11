@@ -1,29 +1,6 @@
-export interface Features {
-  title?: string | Promise<string>;
-  subtitle?: string | Promise<string>;
-  tagline?: string | Promise<string>;
-  id?: string;
-  isDark?: boolean;
-  classes?: {
-    container?: string;
-    title?: string;
-    subtitle?: string;
-    tagline?: string;
-  };
-  bg?: string | Promise<string>;
-  columns?: number;
-}
-
 export interface Headline {
-  title?: string | Promise<string>;
-  subtitle?: string | Promise<string>;
-  tagline?: string | Promise<string>;
-  classes?: {
-    container?: string;
-    title?: string;
-    subtitle?: string;
-    tagline?: string;
-  };
+  title?: string;
+  subtitle?: string;
 }
 
 export interface CallToAction {
